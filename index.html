@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Threads 授權回傳</title>
+<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 16px;line-height:1.6}
+code{display:block;word-break:break-all;background:#f2f2f2;padding:12px;border-radius:6px}button{margin-top:10px;padding:8px 16px}</style></head>
+<body>
+<h1>Threads 授權回傳頁</h1>
+<div id="out">此頁用於接收 Threads API 授權碼。</div>
+<p><a href="privacy.html">隱私權政策 / Privacy Policy</a></p>
+<script>
+const p=new URLSearchParams(location.search);let c=p.get('code');
+if(c){c=c.replace(/#_$/,'');
+document.getElementById('out').innerHTML='<p>✅ 取得授權碼（1 小時內有效，只能用一次）：</p><code id="c"></code><button onclick="navigator.clipboard.writeText(document.getElementById(\'c\').textContent)">複製</button>';
+document.getElementById('c').textContent=c;}
+else if(p.get('error')){document.getElementById('out').textContent='❌ 授權失敗：'+(p.get('error_description')||p.get('error'));}
+</script>
+</body></html>
